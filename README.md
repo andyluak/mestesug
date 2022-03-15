@@ -1,34 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#MESTESUG - Romanian Handmade Heaven
 
-## Getting Started
+## Database
+- Will be using PostgreSQL, perfect for ecommerce, combined with Prisma to easily manage models . 
 
-First, run the development server:
+#### User model 
 
-```bash
-npm run dev
-# or
-yarn dev
 ```
+model User {
+  id          Int      @id @default(autoincrement())
+  first_name  String   @db.VarChar(255)
+  last_name   String   @db.VarChar(255)
+  adress      String   @db.VarChar(300)
+  phoneNumber String   @db.VarChar(20)
+  email       String   @unique @db.VarChar(255)
+  password    String   @db.VarChar(255)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+```
+---
+## API Routes
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Register 
+- thinking about including next-connect to have a similar sinthax to express for GET/POST/PUT/PATCH/DELETE. 
+#### Login
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+---
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## FrontEnd 
+Initial components include **Header Button Footer aLink( normal next-js link with an `<a>` tag already inside) Input**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Components to follow : 
 
-## Learn More
+- Form Component 
+- Maybe some styled components 
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
