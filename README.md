@@ -1,4 +1,4 @@
-#MESTESUG - Romanian Handmade Heaven
+# MESTESUG - Romanian Handmade Heaven
 
 ## Database
 - Will be using PostgreSQL, perfect for ecommerce, combined with Prisma to easily manage models . 
