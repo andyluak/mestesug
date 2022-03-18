@@ -1,37 +1,47 @@
-import React from 'react';
-import Button from 'components/Button/Button';
-import Input from 'components/Input/Input';
-import Link from 'next/link';
-import ALink from '@/components/ALink/aLink';
+import React from "react";
+import Button from "components/Button/Button";
+import Input from "components/Input/Input";
+import Link from "next/link";
+import ALink from "components/ALink/aLink";
+import { setCookie } from "helpers/setCookie";
 
 export default function Autentificare() {
 	const onChange = (e) => {
 		console.log(e.target.value);
 	};
 
-	const onLoginSubmit = (e) => {
+	const onLoginSubmit = async (e) => {
 		e.preventDefault();
 		// Get form data
 		const form = e.target;
-		const data = new FormData(form);
-		const email = data.get('email');
-		const password = data.get('password');
+		const formData = new FormData(form);
+		const email = formData.get("email");
+		const password = formData.get("password");
 
 		// Validate form data
 		if (!email || !password) {
-			return alert('Please fill all fields');
+			return alert("Please fill all fields");
 		}
 
-		fetch('/api/users/login', {
-			method: 'POST',
+		let res = await fetch("/api/users/login", {
+			method: "POST",
 			headers: {
-				'Content-Type': 'application/json',
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
 				email,
 				password,
 			}),
 		});
+
+		if (res.status !== 200) return;
+		const data = await res.json();
+
+		let cookieValue = JSON.stringify({
+			email: data.email,
+			token: data.token,
+		});
+		setCookie(cookieValue);
 	};
 	return (
 		// create a beautiful form with tailwind
@@ -42,6 +52,7 @@ export default function Autentificare() {
 			>
 				<Input
 					label="Email"
+					name="email"
 					required
 					type="email"
 					placeholder="Please type your email"
@@ -49,6 +60,7 @@ export default function Autentificare() {
 				/>
 				<Input
 					label="Password"
+					name="password"
 					required
 					type="password"
 					placeholder="Please type your password"

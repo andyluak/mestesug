@@ -1,36 +1,37 @@
-const jwt = require('jsonwebtoken');
-const prisma = require('lib/prisma/prisma');
-import getConfig from 'next/config';
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
-import { apiHandler } from 'helpers/api/api-handler';
+const prisma = require("lib/prisma/prisma");
+import getConfig from "next/config";
+
+import { apiHandler } from "helpers/api/api-handler";
+import { use } from "bcrypt/promises";
 
 const { serverRuntimeConfig } = getConfig();
 
-export default apiHandler(handler);
-
 const handler = (req, res) => {
 	switch (req.method) {
-		case 'POST':
+		case "POST":
 			return authenticate();
 
 		default:
 			return res.status(405).end(`Method ${req.method} not allowed`);
 	}
 
-	function authenticate() {
+	async function authenticate() {
 		const { email, password } = req.body;
-
-		const user = prisma.user.findUnique({
+		const hashedPassword = await bcrypt.hash(password, 10);
+		const user = await prisma.user.findUnique({
 			where: {
 				email: email,
 			},
 		});
 
-		if (!user) throw 'Email not found';
+		if (!user) throw "Email not found";
 
-		const isPasswordValid = bcrypt.compareSync(password, user.password);
+		const isPasswordValid = await bcrypt.compare(password, user.password);
 
-		if (!isPasswordValid) throw 'Invalid password';
+		if (!isPasswordValid) throw "Invalid password";
 
 		const token = jwt.sign(
 			{
@@ -39,7 +40,7 @@ const handler = (req, res) => {
 			},
 			serverRuntimeConfig.secret,
 			{
-				expiresIn: '1d',
+				expiresIn: "1d",
 			}
 		);
 
@@ -50,3 +51,5 @@ const handler = (req, res) => {
 		});
 	}
 };
+
+export default apiHandler(handler);
