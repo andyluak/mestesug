@@ -1,8 +1,8 @@
-const bcrypt = require("bcrypt");
-const prisma = require("lib/prisma/prisma");
+const bcrypt = require('bcrypt');
+const prisma = require('lib/prisma/prisma');
 
 /**
- * 
+ *
  * model User {
   id         Int      @id @default(autoincrement())
   first_name String   @db.VarChar(255)
@@ -28,7 +28,7 @@ async function register(req, res) {
 	});
 
 	if (user) {
-		return res.status(200).send({ message: "Email already in use" });
+		return res.status(200).send({ message: 'Email already in use' });
 	}
 
 	// hash the password
@@ -48,7 +48,7 @@ async function register(req, res) {
 
 	// send the response
 	res.status(200).send({
-		message: "User created successfully",
+		message: 'User created successfully',
 		user: newUser,
 	});
 }

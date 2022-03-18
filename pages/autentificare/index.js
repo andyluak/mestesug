@@ -1,17 +1,45 @@
-import React from "react";
-import Button from "components/Button/Button";
-import Input from "components/Input/Input";
-import Link from "next/link";
-import ALink from "@/components/ALink/aLink";
+import React from 'react';
+import Button from 'components/Button/Button';
+import Input from 'components/Input/Input';
+import Link from 'next/link';
+import ALink from '@/components/ALink/aLink';
 
 export default function Autentificare() {
 	const onChange = (e) => {
 		console.log(e.target.value);
 	};
+
+	const onLoginSubmit = (e) => {
+		e.preventDefault();
+		// Get form data
+		const form = e.target;
+		const data = new FormData(form);
+		const email = data.get('email');
+		const password = data.get('password');
+
+		// Validate form data
+		if (!email || !password) {
+			return alert('Please fill all fields');
+		}
+
+		fetch('/api/users/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email,
+				password,
+			}),
+		});
+	};
 	return (
 		// create a beautiful form with tailwind
-		<div className="sign-in flex flex-col items-center py-desktop bg-gray-100">
-			<form className="flex flex-col gap-4 justify-center items-center">
+		<div className="flex flex-col items-center bg-gray-100 sign-in py-desktop">
+			<form
+				className="flex flex-col items-center justify-center gap-4"
+				onSubmit={onLoginSubmit}
+			>
 				<Input
 					label="Email"
 					required

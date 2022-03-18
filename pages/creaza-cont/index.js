@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
-import Link from 'next/link';
 import Router from 'next/router';
 
 export default function CreazaCont() {

@@ -30,6 +30,15 @@ model User {
 
 #### Login
 
+- login route now has a handler that handles POST request and returns a 405 for every other.
+- on POST , we check if the user is in DB with prisma & if the password is valid , we generate the token and return it to the user .
+
+---
+
+## Security
+
+Created a jwt-middleware , that will create attach itself to all the routes that need authetication except the actual authenticate route ( so far ). In future there will be some routes that don't need authetication such as GET products, categories and more.
+
 ---
 
 ## FrontEnd
