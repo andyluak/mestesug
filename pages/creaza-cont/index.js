@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import Button from "components/Button/Button";
-import Input from "components/Input/Input";
-import Link from "next/link";
-import Router from "next/router";
+import React, { useState } from 'react';
+import Button from 'components/Button/Button';
+import Input from 'components/Input/Input';
+import Link from 'next/link';
+import Router from 'next/router';
 
 export default function CreazaCont() {
-	const [submitMessage, setSubmitMessage] = useState("");
+	const [submitMessage, setSubmitMessage] = useState('');
 	const onChange = (e) => {
 		console.log(e.target.value);
 	};
 
 	const createAccount = async (user) => {
-		const response = await fetch("/api/users/register", {
-			method: "POST",
+		const response = await fetch('/api/users/register', {
+			method: 'POST',
 			headers: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(user),
 		});
@@ -27,22 +27,22 @@ export default function CreazaCont() {
 		// Get form data
 		const form = e.target;
 		const data = new FormData(form);
-		const email = data.get("email");
-		const password = data.get("password");
-		const firstName = data.get("firstName");
-		const lastName = data.get("lastName");
-		const adress = data.get("adress");
-		const confirmPassword = data.get("confirmPassword");
-		const phone = data.get("phone");
+		const email = data.get('email');
+		const password = data.get('password');
+		const firstName = data.get('firstName');
+		const lastName = data.get('lastName');
+		const adress = data.get('adress');
+		const confirmPassword = data.get('confirmPassword');
+		const phone = data.get('phone');
 
 		// Validate form data
 		if (!email || !password || !firstName || !lastName || !adress) {
-			return alert("Please fill all fields");
+			return alert('Please fill all fields');
 		}
 
 		// Check if password && confirmPassword match
 		if (password !== confirmPassword) {
-			return alert("Passwords do not match");
+			return alert('Passwords do not match');
 		}
 
 		const user = {
@@ -57,15 +57,15 @@ export default function CreazaCont() {
 		let res = createAccount(user);
 		res.then((data) => {
 			if (data.user) {
-				Router.push("/creaza-cont/sucess?success=true");
+				Router.push('/creaza-cont/sucess?success=true');
 			} else {
-				Router.push("/creaza-cont/sucess");
+				Router.push('/creaza-cont/sucess');
 			}
 		});
 	};
 
 	return (
-		<div className="sign-in flex flex-col items-center py-desktop bg-gray-100">
+		<div className="flex flex-col items-center bg-white sign-in py-desktop">
 			<form
 				className="flex flex-col gap-4 justify-center items-center w-[25rem]"
 				onSubmit={onFormSubmit}

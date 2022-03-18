@@ -1,9 +1,10 @@
 # MESTESUG - Romanian Handmade Heaven
 
 ## Database
-- Will be using PostgreSQL, perfect for ecommerce, combined with Prisma to easily manage models . 
 
-#### User model 
+- Will be using PostgreSQL, perfect for ecommerce, combined with Prisma to easily manage models .
+
+#### User model
 
 ```
 model User {
@@ -18,21 +19,32 @@ model User {
   updatedAt   DateTime @updatedAt
 }
 ```
+
 ---
+
 ## API Routes
 
-#### Register 
-- thinking about including next-connect to have a similar sinthax to express for GET/POST/PUT/PATCH/DELETE. 
+#### Register
+
+- thinking about including next-connect to have a similar sinthax to express for GET/POST/PUT/PATCH/DELETE.
+
 #### Login
 
 ---
 
-## FrontEnd 
+## FrontEnd
+
 Initial components include **Header Button Footer aLink( normal next-js link with an `<a>` tag already inside) Input**
 
-Components to follow : 
+Components to follow :
 
-- Form Component 
-- Maybe some styled components 
+- Form Component
+- Maybe some styled components
 
 ---
+
+## Testing
+
+### Storybook
+
+It is a great tool that we can use to fine tweak Reusable components and see them live.

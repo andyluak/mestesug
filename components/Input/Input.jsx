@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 export default function Input({ label, ...otherProps }) {
 	return (
-		<div className="input-container py-2 flex flex-col items-start gap-2 w-full">
-			<label className="text-black text-md ">{label}</label>
+		<div className="flex flex-col items-start w-full gap-2 py-2 input-container">
+			<label className="text-gray-600 text-md ">{label}</label>
 			<input
-				className="bg-transparent p-2 rounded focus:outline-none w-full"
+				className="w-full p-2 bg-white rounded shadow-md focus:outline-none"
 				{...otherProps}
 			/>
 		</div>
