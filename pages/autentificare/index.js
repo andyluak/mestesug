@@ -1,9 +1,9 @@
 import React from "react";
 import Button from "components/Button/Button";
 import Input from "components/Input/Input";
-import Link from "next/link";
 import ALink from "components/ALink/aLink";
 import { setCookie } from "helpers/setCookie";
+import Router from "next/router";
 
 export default function Autentificare() {
 	const onChange = (e) => {
@@ -42,6 +42,8 @@ export default function Autentificare() {
 			token: data.token,
 		});
 		setCookie(cookieValue);
+
+		Router.push("/");
 	};
 	return (
 		// create a beautiful form with tailwind

@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import ALink from "../ALink/aLink";
 
-export default function Header() {
+export default function Header({ isLoggedIn }) {
 	return (
 		<>
 			<div className="header-container bg-primary flex flex-col text-secondary">
@@ -11,9 +11,28 @@ export default function Header() {
 						<ALink href="/" className="font-mono" text="Mestesug" />
 					</div>
 					<ul className="flex flex-row gap-8 px-desktop">
-						<li className="hover:font-bold">
-							<ALink href="/autentificare" text="Intra in cont" />
-						</li>
+						{isLoggedIn ? (
+							<li className="hover:font-bold">
+								<Link href="/contul-meu">
+									<a>
+										<img
+											src="/images/profile.svg"
+											alt="profile"
+											width="24"
+											height="24"
+										/>
+									</a>
+								</Link>
+							</li>
+						) : (
+							<li className="hover:font-bold">
+								<ALink
+									href="/autentificare"
+									text="Intra in cont"
+								/>
+							</li>
+						)}
+
 						<li>
 							<img
 								width="24"
