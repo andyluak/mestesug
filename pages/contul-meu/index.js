@@ -1,3 +1,4 @@
+import ALink from "@/components/ALink/aLink";
 import React from "react";
 
 export default function ContulMeu() {
@@ -6,11 +7,11 @@ export default function ContulMeu() {
 			<h1 className="title text-xl">Salut, Alex</h1>
 			<div className="container flex flex-row">
 				<div className="sidebar flex flex-col w-1/3 gap-4 text-sm">
-					<p>Profile Settings</p>
-					<p>Account Settings</p>
-					<p>Purchases & reviews</p>
-					<p>Adresses</p>
-					<p>Payments</p>
+					<ALink href="/contul-meu" text="Profile Settings" />
+					<ALink href="/" text="Account Settings" />
+					<ALink href="" text="Purchases & reviews" />
+					<ALink href="" text="Adresses" />
+					<ALink href="" text="Payments" />
 				</div>
 
 				<div className="tab flex flex-col w-2/3">

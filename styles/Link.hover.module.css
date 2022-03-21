@@ -1,0 +1,23 @@
+.link {
+	width: fit-content;
+}
+
+.link::after {
+	content: "";
+	width: 0%;
+	display: block;
+	height: 2px;
+	background: black;
+	transition: all 0.3s ease-in-out;
+	background: rgb(35, 33, 61);
+	background: linear-gradient(
+		90deg,
+		rgba(35, 33, 61, 1) 0%,
+		rgba(101, 9, 121, 1) 51%,
+		rgba(0, 212, 255, 1) 100%
+	);
+}
+
+.link:hover::after {
+	width: 100%;
+}
