@@ -1,4 +1,5 @@
 export const getCookie = (name) => {
+	if (typeof window == "undefined") return;
 	const cookies = document.cookie.split(";");
 	let returnValue = false;
 	cookies.map((cookie) => {
