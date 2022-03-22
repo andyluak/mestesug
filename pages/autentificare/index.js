@@ -5,10 +5,12 @@ import ALink from "components/ALink/aLink";
 import { setCookie } from "helpers/setCookie";
 import Router from "next/router";
 
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "redux/user/user.actions";
+
 export default function Autentificare() {
-	const onChange = (e) => {
-		console.log(e.target.value);
-	};
+	const dispatch = useDispatch();
+	const onChange = (e) => {};
 
 	const onLoginSubmit = async (e) => {
 		e.preventDefault();
@@ -23,25 +25,7 @@ export default function Autentificare() {
 			return alert("Please fill all fields");
 		}
 
-		let res = await fetch("/api/users/login", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				email,
-				password,
-			}),
-		});
-
-		if (res.status !== 200) return;
-		const data = await res.json();
-
-		let cookieValue = JSON.stringify({
-			email: data.email,
-			token: data.token,
-		});
-		setCookie(cookieValue);
+		dispatch(setCurrentUser(email, password));
 
 		Router.push("/");
 	};

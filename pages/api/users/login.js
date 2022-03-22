@@ -20,8 +20,7 @@ const handler = (req, res) => {
 
 	async function authenticate() {
 		const { email, password } = req.body;
-		const hashedPassword = await bcrypt.hash(password, 10);
-		const user = await prisma.user.findUnique({
+		let user = await prisma.user.findUnique({
 			where: {
 				email: email,
 			},
@@ -44,9 +43,12 @@ const handler = (req, res) => {
 			}
 		);
 
+		delete user.password;
+		delete user.createdAt;
+		delete user.updatedAt;
+
 		return res.status(200).json({
-			id: user.id,
-			email: user.email,
+			user,
 			token,
 		});
 	}

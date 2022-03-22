@@ -1,45 +1,15 @@
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+
 import ALink from "@/components/ALink/aLink";
 import Modal from "@/components/Modal/Modal";
-
-import React, { useState } from "react";
-import prisma from "lib/prisma/prisma";
-import { getCookie } from "helpers/getCookie";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 
-export const getServerSideProps = async (context) => {
-	let parsedAuthCookie = false;
-	// check if there are any cookies
-	if (!context.req.headers.cookie) return { props: { user: false } };
-	const authCookie = context.req.headers.cookie.split(";").map((cookie) => {
-		// Split the cookie into a key and a value
-		const [key, value] = cookie.split("=");
-		// If the key is equal to the name passed
-		if (key === "authCookie") {
-			parsedAuthCookie = JSON.parse(value);
-		}
-	});
-
-	if (false === parsedAuthCookie) return { props: { user: false } };
-
-	const user = await prisma.user.findUnique({
-		where: {
-			email: parsedAuthCookie.email,
-		},
-	});
-
-	delete user.password;
-	delete user.createdAt;
-	delete user.updatedAt;
-
-	return { props: { user } };
-};
-
-export default function ContulMeu({ user }) {
+export default function ContulMeu() {
+	const user = useSelector((state) => state.user.currentUser);
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const onNameChange = (e) => {
-		console.log(e);
-	};
+	const onNameChange = (e) => {};
 
 	return (
 		<div className="px-desktop flex flex-col gap-8 pt-4">
