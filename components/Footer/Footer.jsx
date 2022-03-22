@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Footer() {
 	return (
-		<div className="footer-container bg-primary flex flex-col text-secondary px-desktop">
-			<div className="footer-primary-menu w-full flex flex-row justify-center py-4 pt-12 text-2xl">
+		<div className="footer-container bg-primary flex flex-col text-secondary sm:px-desktop">
+			<div className="footer-primary-menu w-full flex flex-row justify-center py-4 pt-8 sm:pt-12 text-2xl">
 				<p>Mestesug</p>
 			</div>
 			<div className="footer-secondary py-4 px-desktop flex flex-row items-baseline text-center justify-between">

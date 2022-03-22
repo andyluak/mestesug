@@ -19,7 +19,7 @@ export default function Home() {
 				<div
 					className={`${styles["hero-container"]}  hero-container relative h-96 p-0 w-auto`}
 				>
-					<ul className=" z-10 secondary-header w-full text-center flex flex-row justify-center gap-8 text-sm p-4 items-center hover:bg-primary hover:text-secondary transition-all text-primary">
+					<ul className="z-10 secondary-header w-full text-center flex flex-row justify-center sm:gap-8 text-sm p-mobile items-center gap-4 hover:bg-primary hover:text-secondary transition-all text-primary">
 						<li className="hover:font-bold transition-all duration-200">
 							Bijuterii
 						</li>
@@ -33,41 +33,73 @@ export default function Home() {
 							Jucarii
 						</li>
 					</ul>
-					<div className="hero-header-container flex flex-col justify-center items-center py-8">
-						<h1 className="text-primary text-4xl pb-32">Descopera produse unice de la cei mai creativi producatori</h1>	
+					<div className="hero-header-container flex flex-col justify-center items-center px-mobile py-mobile sm:py-8">
+						<h1 className="text-primary text-3xl text-center sm:text-4xl pb-16 sm:pb-32">
+							Descopera produse unice de la cei mai creativi
+							producatori
+						</h1>
 						<div className="hero-button-group flex flex-row gap-8">
-							<Button text="Categorii" buttonStyle={'primary'}/>
-							<Button text="Vanzatorii Lunii" buttonStyle={'secondary'}/>
+							<Button text="Categorii" buttonStyle={"primary"} />
+							<Button
+								text="Vanzatorii Lunii"
+								buttonStyle={"secondary"}
+							/>
 						</div>
 					</div>
 				</div>
 
-				<div className="popular-categories p-desktop">
-					<h3 className="text-2xl pb-8">Descopera cele mai populare categorii</h3>
-					<div className="popular-categories-container flex flex-row gap-8 justify-between">
-						<div className="grid-item shadow-md bg-transparent shadow-gray-300">
+				<div className="popular-categories p-mobile sm:p-desktop">
+					<h3 className="text-2xl pb-8">
+						Descopera cele mai populare categorii
+					</h3>
+					<div className="popular-categories-container flex sm:flex-row flex-col gap-8 items-center sm:justify-between">
+						<div className="grid-item shadow-md bg-transparent shadow-gray-300 w-2/3 sm:w-full">
 							<div className="grid-item-image-container w-full h-52 relative">
-								<Image src="/images/placeholder-image.png" width={200} height={200} /> 
+								<Image
+									src="/images/placeholder-image.png"
+									width={300}
+									height={200}
+								/>
 							</div>
-							<h2 className="text-lg py-4 text-center">Categorie</h2>
+							<h2 className="text-lg py-4 text-center">
+								Categorie
+							</h2>
 						</div>
-						<div className="grid-item shadow-md bg-transparent shadow-gray-300">
+						<div className="grid-item shadow-md bg-transparent shadow-gray-300 w-2/3 sm:w-full">
 							<div className="grid-item-image-container w-full h-52 relative">
-								<Image src="/images/placeholder-image.png" width={200} height={200} /> 
+								<Image
+									src="/images/placeholder-image.png"
+									width={300}
+									height={200}
+								/>
 							</div>
-							<h2 className="text-lg py-4 text-center">Categorie</h2>
+							<h2 className="text-lg py-4 text-center">
+								Categorie
+							</h2>
 						</div>
-						<div className="grid-item shadow-md bg-transparent shadow-gray-300">
+						<div className="grid-item shadow-md bg-transparent shadow-gray-300 w-2/3 sm:w-full">
 							<div className="grid-item-image-container w-full h-52 relative">
-								<Image src="/images/placeholder-image.png" width={200} height={200} /> 
+								<Image
+									src="/images/placeholder-image.png"
+									width={300}
+									height={200}
+								/>
 							</div>
-							<h2 className="text-lg py-4 text-center">Categorie</h2>
+							<h2 className="text-lg py-4 text-center">
+								Categorie
+							</h2>
 						</div>
-						<div className="grid-item shadow-md bg-transparent shadow-gray-300">
+						<div className="grid-item shadow-md bg-transparent shadow-gray-300 w-2/3 sm:w-full">
 							<div className="grid-item-image-container w-full h-52 relative">
-								<Image src="/images/placeholder-image.png" width={200} height={200} /> 
+								<Image
+									src="/images/placeholder-image.png"
+									width={300}
+									height={200}
+								/>
 							</div>
-							<h2 className="text-lg py-4 text-center">Categorie</h2>
+							<h2 className="text-lg py-4 text-center">
+								Categorie
+							</h2>
 						</div>
 					</div>
 				</div>

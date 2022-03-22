@@ -7,7 +7,7 @@ export default function Header({ isLoggedIn }) {
 		<>
 			<div className="header-container bg-primary flex flex-col text-secondary">
 				<div className="header-primary-menu w-full flex flex-row justify-between  p-4">
-					<div className="header-logo flex content-center justify-center text-center items-center px-desktop">
+					<div className="header-logo flex px-mobile sm:px-desktop">
 						<ALink href="/" className="font-mono" text="Mestesug" />
 					</div>
 					<ul className="flex flex-row gap-8 px-desktop">
