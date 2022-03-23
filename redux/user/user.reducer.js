@@ -14,6 +14,11 @@ export const userReducer = (state = INITIAL_STATE, action) => {
 				currentUser: action.payload,
 				isAuthenticated: true,
 			};
+		case UserActionTypes.UPDATE_CURRENT_USER:
+			return {
+				...state,
+				currentUser: action.payload,
+			};
 		default:
 			return state;
 	}

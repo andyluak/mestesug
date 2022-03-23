@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCurrentUser } from "redux/user/user.actions";
 
 import ALink from "@/components/ALink/aLink";
 import Modal from "@/components/Modal/Modal";
@@ -8,8 +9,53 @@ import Button from "@/components/Button/Button";
 
 export default function ContulMeu() {
 	const user = useSelector((state) => state.user.currentUser);
+	const dispatch = useDispatch();
 	const [isModalOpen, setIsModalOpen] = useState(undefined);
-	const onNameChange = (e) => {};
+	const formRef = useRef(null);
+	const onNameChange = (e) => {
+		console.log(e);
+	};
+
+	const onNameSubmit = (e) => {
+		const action = e.target.dataset.action;
+
+		const formData = new FormData(formRef.current);
+		//Get first_name and last_name
+		const first_name = formData.get("first_name");
+		const last_name = formData.get("last_name");
+
+		// Get the cookie bearer
+		const bearer = document.cookie.split("=")[1];
+
+		switch (action) {
+			case "save":
+				fetch(`/api/users/${user.id}`, {
+					method: "PATCH",
+					body: JSON.stringify({
+						first_name,
+						last_name,
+					}),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${bearer}`,
+					},
+				})
+					.then((res) => {
+						dispatch(updateCurrentUser(user.id));
+						setIsModalOpen(false);
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+				break;
+			case "remove":
+				console.log(first_name, last_name);
+				break;
+
+			default:
+				return;
+		}
+	};
 
 	const onModalOpenClick = (e) => {
 		e.preventDefault();
@@ -46,25 +92,35 @@ export default function ContulMeu() {
 							show={isModalOpen === "name" && true}
 							setIsModalOpen={setIsModalOpen}
 						>
-							<Input
-								type="text"
-								name="first_name"
-								label="First Name"
-								placeholder={user.first_name}
-								onChange={onNameChange}
-								className="w-full"
-							/>
-							<Input
-								type="text"
-								name="last_name"
-								label="Last Name"
-								placeholder={user.last_name}
-								onChange={onNameChange}
-							/>
-							<div className="button-group flex flex-row gap-4 py-4">
-								<Button text="Save" buttonStyle={"primary"} />
-								<Button text="Remove" buttonStyle="secondary" />
-							</div>
+							<form
+								className="w-2/3"
+								onSubmit={(e) => e.preventDefault()}
+								ref={formRef}
+							>
+								<Input
+									type="text"
+									name="first_name"
+									label="First Name"
+									placeholder={user.first_name}
+									onChange={onNameChange}
+									className="w-full"
+								/>
+								<Input
+									type="text"
+									name="last_name"
+									label="Last Name"
+									placeholder={user.last_name}
+									onChange={onNameChange}
+								/>
+								<div className="button-group flex flex-row gap-4 py-4">
+									<Button
+										text="Save"
+										buttonStyle={"primary"}
+										data-action="save"
+										onClick={onNameSubmit}
+									/>
+								</div>
+							</form>
 						</Modal>
 					</div>
 					<div className="flex flex-row gap-4 items-baseline">
@@ -86,7 +142,7 @@ export default function ContulMeu() {
 								name="phoneNumber"
 								label="Phone Number"
 								placeholder={user.phoneNumber}
-								onChange={onNameChange}
+								onChange={() => {}}
 								className="w-full"
 							/>
 

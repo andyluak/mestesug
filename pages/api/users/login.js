@@ -5,7 +5,6 @@ const prisma = require("lib/prisma/prisma");
 import getConfig from "next/config";
 
 import { apiHandler } from "helpers/api/api-handler";
-import { use } from "bcrypt/promises";
 
 const { serverRuntimeConfig } = getConfig();
 

@@ -1,5 +1,5 @@
-import { jwtMiddleware } from './jwt-middleware';
-import { errorHandler } from './error-handler';
+import { jwtMiddleware } from "./jwt-middleware";
+import { errorHandler } from "./error-handler";
 
 export function apiHandler(handler) {
 	return async (req, res) => {
