@@ -8,8 +8,15 @@ import Button from "@/components/Button/Button";
 
 export default function ContulMeu() {
 	const user = useSelector((state) => state.user.currentUser);
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(undefined);
 	const onNameChange = (e) => {};
+
+	const onModalOpenClick = (e) => {
+		e.preventDefault();
+		// get data-modal attribute from the button
+		const modalValue = e.target.dataset.modal;
+		setIsModalOpen(modalValue);
+	};
 
 	return (
 		<div className="px-desktop flex flex-col gap-8 pt-4">
@@ -23,19 +30,20 @@ export default function ContulMeu() {
 					<ALink href="/contul-meu" text="Payments" />
 				</div>
 
-				<div className="tab flex flex-col w-2/3">
+				<div className="tab flex flex-col w-2/3 gap-2">
 					<p className="text-lg pb-4">Profile Settings</p>
 					<div className="flex flex-row gap-4 items-baseline">
 						<span className="text-lg">Name:</span>
 						<span className="text-lg">{`${user.first_name} ${user.last_name}`}</span>
 						<button
-							onClick={() => setIsModalOpen(true)}
+							onClick={onModalOpenClick}
+							data-modal="name"
 							className="text-xs"
 						>
 							Edit / Change
 						</button>
 						<Modal
-							show={isModalOpen}
+							show={isModalOpen === "name" && true}
 							setIsModalOpen={setIsModalOpen}
 						>
 							<Input
@@ -44,6 +52,7 @@ export default function ContulMeu() {
 								label="First Name"
 								placeholder={user.first_name}
 								onChange={onNameChange}
+								className="w-full"
 							/>
 							<Input
 								type="text"
@@ -52,6 +61,35 @@ export default function ContulMeu() {
 								placeholder={user.last_name}
 								onChange={onNameChange}
 							/>
+							<div className="button-group flex flex-row gap-4 py-4">
+								<Button text="Save" buttonStyle={"primary"} />
+								<Button text="Remove" buttonStyle="secondary" />
+							</div>
+						</Modal>
+					</div>
+					<div className="flex flex-row gap-4 items-baseline">
+						<span className="text-lg">Phone number:</span>
+						<span className="text-lg">{`${user.phoneNumber}`}</span>
+						<button
+							onClick={onModalOpenClick}
+							className="text-xs"
+							data-modal="phone"
+						>
+							Edit / Change
+						</button>
+						<Modal
+							show={isModalOpen === "phone" && true}
+							setIsModalOpen={setIsModalOpen}
+						>
+							<Input
+								type="number"
+								name="phoneNumber"
+								label="Phone Number"
+								placeholder={user.phoneNumber}
+								onChange={onNameChange}
+								className="w-full"
+							/>
+
 							<div className="button-group flex flex-row gap-4 py-4">
 								<Button text="Save" buttonStyle={"primary"} />
 								<Button text="Remove" buttonStyle="secondary" />
