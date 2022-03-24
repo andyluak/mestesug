@@ -7,12 +7,23 @@ import Modal from "@/components/Modal/Modal";
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 
+import linkStyles from "styles/Link.hover.module.css";
+import Router from "next/router";
+
 export default function ContulMeu() {
 	const user = useSelector((state) => state.user.currentUser);
 	const dispatch = useDispatch();
 	const [isModalOpen, setIsModalOpen] = useState(undefined);
 	const nameFormRef = useRef(null);
 	const phoneFormRef = useRef(null);
+
+	const onLogoutUser = () => {
+		dispatch({
+			type: "LOGOUT_USER",
+		});
+		Router.push("/");
+	};
+
 	const onNameChange = (e) => {};
 
 	const onNameSubmit = async (e) => {
@@ -131,9 +142,20 @@ export default function ContulMeu() {
 		setIsModalOpen(modalValue);
 	};
 
+	if (!user) return null;
+
 	return (
 		<div className="flex flex-col gap-8 pt-4 px-desktop">
-			<h1 className="text-xl title">Salut, Alex</h1>
+			<div className="flex flex-row justify-between">
+				<h1 className="text-xl title">Salut, Alex</h1>
+				<p
+					className={`${linkStyles.link} cursor-pointer`}
+					onClick={onLogoutUser}
+				>
+					Logout
+				</p>
+			</div>
+
 			<div className="container flex flex-row">
 				<div className="flex flex-col w-1/3 gap-4 text-sm sidebar">
 					<ALink href="/contul-meu" text="Profile Settings" />

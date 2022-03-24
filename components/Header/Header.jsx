@@ -5,9 +5,9 @@ import ALink from "../ALink/aLink";
 export default function Header({ isLoggedIn }) {
 	return (
 		<>
-			<div className="header-container bg-primary flex flex-col text-secondary">
-				<div className="header-primary-menu w-full flex flex-row justify-between  p-4">
-					<div className="header-logo flex px-mobile sm:px-desktop">
+			<div className="flex flex-col header-container bg-primary text-secondary">
+				<div className="flex flex-row justify-between w-full py-4 header-primary-menu">
+					<div className="flex header-logo px-mobile sm:px-desktop">
 						<ALink href="/" className="font-mono" text="Mestesug" />
 					</div>
 					<ul className="flex flex-row gap-8 px-desktop">
