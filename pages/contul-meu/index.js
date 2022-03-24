@@ -11,15 +11,14 @@ export default function ContulMeu() {
 	const user = useSelector((state) => state.user.currentUser);
 	const dispatch = useDispatch();
 	const [isModalOpen, setIsModalOpen] = useState(undefined);
-	const formRef = useRef(null);
-	const onNameChange = (e) => {
-		console.log(e);
-	};
+	const nameFormRef = useRef(null);
+	const phoneFormRef = useRef(null);
+	const onNameChange = (e) => {};
 
-	const onNameSubmit = (e) => {
+	const onNameSubmit = async (e) => {
 		const action = e.target.dataset.action;
 
-		const formData = new FormData(formRef.current);
+		const formData = new FormData(nameFormRef.current);
 		//Get first_name and last_name
 		const first_name = formData.get("first_name");
 		const last_name = formData.get("last_name");
@@ -29,27 +28,95 @@ export default function ContulMeu() {
 
 		switch (action) {
 			case "save":
-				fetch(`/api/users/${user.id}`, {
-					method: "PATCH",
-					body: JSON.stringify({
-						first_name,
-						last_name,
-					}),
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${bearer}`,
-					},
-				})
-					.then((res) => {
-						dispatch(updateCurrentUser(user.id));
-						setIsModalOpen(false);
-					})
-					.catch((err) => {
-						console.log(err);
+				try {
+					const response = await fetch(`/api/users/${user.id}`, {
+						method: "PATCH",
+						body: JSON.stringify({
+							first_name,
+							last_name,
+						}),
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${bearer}`,
+						},
 					});
+					const updatedUserJson = await response.json();
+					dispatch(updateCurrentUser(updatedUserJson));
+					setIsModalOpen(false);
+				} catch (error) {
+					console.log(error);
+				}
 				break;
 			case "remove":
-				console.log(first_name, last_name);
+				try {
+					const response = await fetch(`/api/users/${user.id}`, {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${bearer}`,
+						},
+						body: JSON.stringify({
+							first_name: "",
+							last_name: "",
+						}),
+					});
+					const updatedUserJson = await response.json();
+					dispatch(updateCurrentUser(updatedUserJson));
+					setIsModalOpen(false);
+				} catch (error) {}
+				break;
+
+			default:
+				return;
+		}
+	};
+
+	const onPhoneSubmit = async (e) => {
+		const action = e.target.dataset.action;
+
+		const formData = new FormData(phoneFormRef.current);
+		//Get first_name and last_name
+		const phoneNumber = formData.get("phoneNumber");
+
+		// Get the cookie bearer
+		const bearer = document.cookie.split("=")[1];
+
+		switch (action) {
+			case "save":
+				try {
+					const response = await fetch(`/api/users/${user.id}`, {
+						method: "PATCH",
+						body: JSON.stringify({
+							phoneNumber,
+						}),
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${bearer}`,
+						},
+					});
+					const updatedUserJson = await response.json();
+					dispatch(updateCurrentUser(updatedUserJson));
+					setIsModalOpen(false);
+				} catch (error) {
+					console.log(error);
+				}
+				break;
+			case "remove":
+				try {
+					const response = await fetch(`/api/users/${user.id}`, {
+						method: "PATCH",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${bearer}`,
+						},
+						body: JSON.stringify({
+							phoneNumber: "",
+						}),
+					});
+					const updatedUserJson = await response.json();
+					dispatch(updateCurrentUser(updatedUserJson));
+					setIsModalOpen(false);
+				} catch (error) {}
 				break;
 
 			default:
@@ -95,7 +162,7 @@ export default function ContulMeu() {
 							<form
 								className="w-2/3"
 								onSubmit={(e) => e.preventDefault()}
-								ref={formRef}
+								ref={nameFormRef}
 							>
 								<Input
 									type="text"
@@ -137,19 +204,35 @@ export default function ContulMeu() {
 							show={isModalOpen === "phone" && true}
 							setIsModalOpen={setIsModalOpen}
 						>
-							<Input
-								type="number"
-								name="phoneNumber"
-								label="Phone Number"
-								placeholder={user.phoneNumber}
-								onChange={() => {}}
-								className="w-full"
-							/>
+							<form
+								ref={phoneFormRef}
+								className="w-2/3"
+								onSubmit={(e) => e.preventDefault()}
+							>
+								<Input
+									type="number"
+									name="phoneNumber"
+									label="Phone Number"
+									placeholder={user.phoneNumber}
+									onChange={() => {}}
+									className="w-full"
+								/>
 
-							<div className="button-group flex flex-row gap-4 py-4">
-								<Button text="Save" buttonStyle={"primary"} />
-								<Button text="Remove" buttonStyle="secondary" />
-							</div>
+								<div className="button-group flex flex-row gap-4 py-4">
+									<Button
+										text="Save"
+										buttonStyle={"primary"}
+										data-action="save"
+										onClick={onPhoneSubmit}
+									/>
+									<Button
+										text="Remove"
+										buttonStyle="secondary"
+										data-action="remove"
+										onClick={onPhoneSubmit}
+									/>
+								</div>
+							</form>
 						</Modal>
 					</div>
 				</div>

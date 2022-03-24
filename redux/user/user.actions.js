@@ -15,21 +15,12 @@ export const setCurrentUser = (email, password) => {
 	};
 };
 
-export const updateCurrentUser = (id) => {
+export const updateCurrentUser = (updatedUser) => {
 	return async (dispatch) => {
 		try {
-			const bearer = document.cookie.split(";")[0].split("=")[1];
-			const res = await fetch(`/api/users/${id}`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${bearer}`,
-				},
-			});
-			const user = await res.json();
 			dispatch({
 				type: UserActionTypes.UPDATE_CURRENT_USER,
-				payload: user,
+				payload: updatedUser,
 			});
 		} catch (error) {
 			console.log(error);

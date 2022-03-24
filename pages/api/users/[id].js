@@ -42,7 +42,14 @@ const handler = (req, res) => {
 				...req.body,
 			},
 		});
-		return res.status(200).end("User updated");
+
+		// Get the updated user
+		const updatedUser = await prisma.user.findUnique({
+			where: {
+				id,
+			},
+		});
+		return res.status(200).json(updatedUser);
 	}
 
 	async function getUser(req, res) {
