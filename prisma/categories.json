@@ -1,0 +1,18 @@
+[
+	{
+		"name": "Bijuterii",
+		"image": "bijuterii.webp"
+	},
+	{
+		"name": "Decor & Casa",
+		"image": "decor.webp"
+	},
+	{
+		"name": "Imbracaminte & Incaltaminte",
+		"image": "imbracaminte.jpeg"
+	},
+	{
+		"name": "Jucarii",
+		"image": "jucarii.png"
+	}
+]

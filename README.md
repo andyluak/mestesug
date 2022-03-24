@@ -20,6 +20,18 @@ model User {
 }
 ```
 
+#### Category Model
+
+```
+model Categories {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  image     String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+```
+
 ---
 
 ## API Routes
