@@ -1,18 +1,22 @@
 [
 	{
 		"name": "Bijuterii",
+		"slug": "bijuterii",
 		"image": "bijuterii.webp"
 	},
 	{
 		"name": "Decor & Casa",
+		"slug": "decor-casa",
 		"image": "decor.webp"
 	},
 	{
 		"name": "Imbracaminte & Incaltaminte",
+		"slug": "imbracaminte-incaltaminte",
 		"image": "imbracaminte.jpeg"
 	},
 	{
 		"name": "Jucarii",
+		"slug": "jucarii",
 		"image": "jucarii.png"
 	}
 ]

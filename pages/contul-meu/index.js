@@ -132,10 +132,10 @@ export default function ContulMeu() {
 	};
 
 	return (
-		<div className="px-desktop flex flex-col gap-8 pt-4">
-			<h1 className="title text-xl">Salut, Alex</h1>
+		<div className="flex flex-col gap-8 pt-4 px-desktop">
+			<h1 className="text-xl title">Salut, Alex</h1>
 			<div className="container flex flex-row">
-				<div className="sidebar flex flex-col w-1/3 gap-4 text-sm">
+				<div className="flex flex-col w-1/3 gap-4 text-sm sidebar">
 					<ALink href="/contul-meu" text="Profile Settings" />
 					<ALink href="/contul-meu" text="Account Settings" />
 					<ALink href="/contul-meu" text="Purchases & reviews" />
@@ -143,9 +143,9 @@ export default function ContulMeu() {
 					<ALink href="/contul-meu" text="Payments" />
 				</div>
 
-				<div className="tab flex flex-col w-2/3 gap-2">
-					<p className="text-lg pb-4">Profile Settings</p>
-					<div className="flex flex-row gap-4 items-baseline">
+				<div className="flex flex-col w-2/3 gap-2 tab">
+					<p className="pb-4 text-lg">Profile Settings</p>
+					<div className="flex flex-row items-baseline gap-4">
 						<span className="text-lg">Name:</span>
 						<span className="text-lg">{`${user.first_name} ${user.last_name}`}</span>
 						<button
@@ -179,7 +179,7 @@ export default function ContulMeu() {
 									placeholder={user.last_name}
 									onChange={onNameChange}
 								/>
-								<div className="button-group flex flex-row gap-4 py-4">
+								<div className="flex flex-row gap-4 py-4 button-group">
 									<Button
 										text="Save"
 										buttonStyle={"primary"}
@@ -190,7 +190,7 @@ export default function ContulMeu() {
 							</form>
 						</Modal>
 					</div>
-					<div className="flex flex-row gap-4 items-baseline">
+					<div className="flex flex-row items-baseline gap-4">
 						<span className="text-lg">Phone number:</span>
 						<span className="text-lg">{`${user.phoneNumber}`}</span>
 						<button
@@ -218,7 +218,7 @@ export default function ContulMeu() {
 									className="w-full"
 								/>
 
-								<div className="button-group flex flex-row gap-4 py-4">
+								<div className="flex flex-row gap-4 py-4 button-group">
 									<Button
 										text="Save"
 										buttonStyle={"primary"}

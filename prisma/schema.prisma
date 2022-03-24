@@ -20,9 +20,58 @@ model User {
 }
 
 model Categories {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  image     String   @db.VarChar(255)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                 Int                  @id @default(autoincrement())
+  slug               String               @unique @db.VarChar(255)
+  name               String               @db.VarChar(255)
+  image              String               @db.VarChar(255)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  Product_Categories Product_Categories[]
+}
+
+model Sellers {
+  id             Int        @id @default(autoincrement())
+  first_name     String     @db.VarChar(255)
+  last_name      String     @db.VarChar(255)
+  street         String     @db.VarChar(255)
+  city           String     @db.VarChar(255)
+  country        String     @db.VarChar(255)
+  phone          String     @db.VarChar(255)
+  company_name   String     @db.VarChar(255)
+  company_number String     @db.VarChar(255)
+  email          String     @unique @db.VarChar(255)
+  password       String     @db.VarChar(255)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  Products       Products[]
+}
+
+model Products {
+  id                  Int                  @id @default(autoincrement())
+  seller_id           Int?
+  product_name        String               @db.VarChar(255)
+  product_slug        String               @unique @db.VarChar(255)
+  product_description String               @db.VarChar(255)
+  product_price       String               @db.VarChar(255)
+  product_total_order Int                  @db.Integer
+  product_stock       Int                  @db.Integer
+  Sellers             Sellers?             @relation(fields: [seller_id], references: [id])
+  Product_Categories  Product_Categories[]
+  Product_Image       Product_Image[]
+}
+
+model Product_Categories {
+  id          Int         @id @default(autoincrement())
+  product_id  Int?
+  category_id Int?
+  Products    Products?   @relation(fields: [product_id], references: [id])
+  Categories  Categories? @relation(fields: [category_id], references: [id])
+}
+
+model Product_Image {
+  id                Int       @id @default(autoincrement())
+  product_id        Int?
+  product_image_url String    @db.VarChar(255)
+  product_image_alt String    @db.VarChar(255)
+  Products          Products? @relation(fields: [product_id], references: [id])
 }
