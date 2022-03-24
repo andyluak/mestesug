@@ -49,6 +49,9 @@ const handler = (req, res) => {
 				id,
 			},
 		});
+		delete updatedUser.password;
+		delete updateUser.createdAt;
+		delete updateUser.updatedAt;
 		return res.status(200).json(updatedUser);
 	}
 
@@ -65,6 +68,11 @@ const handler = (req, res) => {
 		if (user.id !== parseInt(id)) {
 			return res.status(403).end("Forbidden");
 		}
+
+		delete updatedUser.password;
+		delete updateUser.createdAt;
+		delete updateUser.updatedAt;
+
 		return res.status(200).json(user);
 	}
 };
