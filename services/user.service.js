@@ -1,5 +1,6 @@
-export const login = async (email, password) => {
-	let res = await fetch("/api/users/login", {
+export const login = async (email, password, seller) => {
+	const URL = seller ? "/api/sellers/login" : "/api/users/login";
+	let res = await fetch(URL, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

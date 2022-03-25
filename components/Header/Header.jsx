@@ -5,12 +5,12 @@ import ALink from "../ALink/aLink";
 export default function Header({ isLoggedIn }) {
 	return (
 		<>
-			<div className="flex flex-col header-container bg-primary text-secondary">
+			<div className="flex flex-col px-4 sm:px-40 header-container bg-primary text-secondary">
 				<div className="flex flex-row justify-between w-full py-4 header-primary-menu">
-					<div className="flex header-logo px-mobile sm:px-desktop">
+					<div className="flex header-logo">
 						<ALink href="/" className="font-mono" text="Mestesug" />
 					</div>
-					<ul className="flex flex-row gap-8 px-desktop">
+					<ul className="flex flex-row gap-8">
 						{isLoggedIn ? (
 							<li className="hover:font-bold">
 								<Link href="/contul-meu">

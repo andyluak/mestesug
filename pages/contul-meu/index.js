@@ -145,7 +145,7 @@ export default function ContulMeu() {
 	if (!user) return null;
 
 	return (
-		<div className="flex flex-col gap-8 pt-4 px-desktop">
+		<div className="flex flex-col gap-8 pt-4 sm:px-40">
 			<div className="flex flex-row justify-between">
 				<h1 className="text-xl title">Salut, Alex</h1>
 				<p
